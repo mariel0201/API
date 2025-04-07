@@ -1,0 +1,295 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Contenedor de las cards */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Estilo de cada card */
+.card {
+  width: 250px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover: Aumenta el tamaño y mejora la sombra */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(219, 109, 65, 0.753);
+}
+
+/* Imagen dentro de la card */
+.img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Fondo gris claro */
+  margin: 0;
+  padding: 20px;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Estiliza el título principal */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+/* Estiliza la lista de navegación */
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #0056b3;
+}
+
+/* Estilos para las cards */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.coffee-title {
+  font-family: "Brush Script MT", cursive;
+  font-size: 60px;
+}
+.coffee-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f1e4; /* Color crema */
+  border: 8px solid #d4a373; /* Borde marrón claro */
+  border-radius: 13em/3em;
+  padding: 20px;
+  width: 150px;
+  height: 40px;
+  margin: 20px auto;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+}
+.wine-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8e1e7; /* Color rosado claro */
+  border: 2px solid #b03a2e; /* Borde rojo vino */
+  border-radius: 15px;
+  padding: 20px;
+  width: 200px;
+  margin: 20px auto;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wines-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 28px;
+  color: #6b1b0c; /* Rojo vino */
+}
+.wines-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.wine-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8e1e7; /* Color rosado claro */
+  border: 2px solid #b03a2e; /* Borde rojo vino */
+  border-radius: 15px;
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.wine-card:hover {
+  transform: scale(1.05);
+}
+
+.wine-img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.wine-details {
+  margin-top: 10px;
+  font-family: "Dancing Script", cursive;
+  color: #6b1b0c; /* Rojo vino oscuro */
+}
+
+.wine-details p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+/* Imagen dentro de la card */
+.wine-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto al pasar el mouse sobre la imagen */
+.wine-card:hover .wine-img {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+/* Imagen dentro de la card */
+.wine-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto al pasar el mouse sobre la imagen */
+.wine-card:hover .wine-img {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.wine-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.wine-form input {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #b03a2e;
+  border-radius: 5px;
+}
+
+.wine-form button {
+  padding: 10px;
+  background-color: #b03a2e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wine-form button:hover {
+  background-color: #7b1b0a;
+}
+
+.wine-card button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wine-card button:hover {
+  background-color: #c9302c;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 15px auto;
+  display: block;
+  border: 2px solid #b03a2e;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+
+
+
+
