@@ -1,47 +1,59 @@
 import React, { useEffect, useState } from "react";
+import "../fonts.css";
 
 export default function WinesPage() {
   const [wines, setWines] = useState([]);
   const [newWine, setNewWine] = useState({ winery: "", wine: "", location: "" });
-  const [editWine, setEditWine] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
-  const [showForm, setShowForm] = useState(false); // Estado para mostrar el formulario
+  const [editWineId, setEditWineId] = useState(null);
+  const [editWineData, setEditWineData] = useState({ winery: "", wine: "", location: "" });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    fetch("https://api.sampleapis.com/wines/reds") // Ajusta la URL si es necesario
+    fetch("https://api.sampleapis.com/wines/reds")
       .then((response) => response.json())
       .then((data) => setWines(data))
       .catch((error) => console.error("Error fetching wines:", error));
   }, []);
 
-  // 🟢 Crear un nuevo vino
   const handleAddWine = () => {
     const newWineData = { ...newWine, id: wines.length + 1 };
     setWines([...wines, newWineData]);
     setNewWine({ winery: "", wine: "", location: "" });
-    setShowForm(false); // Ocultar el formulario después de agregar
+    setShowForm(false);
   };
 
-  // 🔵 Actualizar un vino
-  const handleUpdateWine = () => {
-    setWines(wines.map((wine) => (wine.id === editWine.id ? editWine : wine)));
-    setEditWine(null);
+  const handleEditClick = (wine) => {
+    setEditWineId(wine.id);
+    setEditWineData({
+      winery: wine.winery,
+      wine: wine.wine,
+      location: wine.location,
+    });
   };
 
-  // 🔴 Eliminar un vino
+  const handleUpdateWine = (id) => {
+    setWines(
+      wines.map((wine) =>
+        wine.id === id ? { ...wine, ...editWineData } : wine
+      )
+    );
+    setEditWineId(null);
+    setEditWineData({ winery: "", wine: "", location: "" });
+  };
+
   const handleDeleteWine = (id) => {
     setWines(wines.filter((wine) => wine.id !== id));
   };
 
-  // 🔍 Filtrar vinos por nombre o bodega
   const filteredWines = wines.filter((wine) =>
-    wine.winery.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    wine.wine.toLowerCase().includes(searchTerm.toLowerCase())
+    wine.winery?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    wine.wine?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div>
-      <h1 className="wines-title">Wines</h1>
+      <h1 style={{ fontFamily: "Quick" }} className="wines-title">Wines</h1>
 
       {/* Barra de búsqueda */}
       <input
@@ -57,7 +69,7 @@ export default function WinesPage() {
         {showForm ? "Ocultar Formulario" : "Agregar Vino"}
       </button>
 
-      {/* Formulario para agregar un vino (se muestra solo si showForm es true) */}
+      {/* Formulario para agregar un vino */}
       {showForm && (
         <div className="wine-form">
           <input
@@ -89,11 +101,41 @@ export default function WinesPage() {
             <div key={wine.id} className="wine-card">
               <img className="wine-img" src={wine.image} alt={wine.wine} />
               <div className="wine-details">
-                <h3>{wine.winery}</h3>
-                <p><strong>Nombre:</strong> {wine.wine}</p>
-                <p><strong>Ubicación:</strong> {wine.location}</p>
-                <button onClick={() => setEditWine(wine)}>✏️ Editar</button>
-                <button onClick={() => handleDeleteWine(wine.id)}>🗑️ Eliminar</button>
+                {editWineId === wine.id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editWineData.winery}
+                      onChange={(e) =>
+                        setEditWineData({ ...editWineData, winery: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      value={editWineData.wine}
+                      onChange={(e) =>
+                        setEditWineData({ ...editWineData, wine: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      value={editWineData.location}
+                      onChange={(e) =>
+                        setEditWineData({ ...editWineData, location: e.target.value })
+                      }
+                    />
+                    <button onClick={() => handleUpdateWine(wine.id)}>💾 Guardar</button>
+                    <button onClick={() => setEditWineId(null)}>❌ Cancelar</button>
+                  </>
+                ) : (
+                  <>
+                    <h3>{wine.winery}</h3>
+                    <p><strong>Nombre:</strong> {wine.wine}</p>
+                    <p><strong>Ubicación:</strong> {wine.location}</p>
+                    <button onClick={() => handleEditClick(wine)}>✏️ Editar</button>
+                    <button onClick={() => handleDeleteWine(wine.id)}>🗑️ Eliminar</button>
+                  </>
+                )}
               </div>
             </div>
           ))

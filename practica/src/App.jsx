@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import WinesPage from "./pages/WinesPage";
 import CoffeePage from "./pages/CoffeePage";
 import JsonDataPage from "./pages/JsonDataPage";
+import "@fontsource/dancing-script"; // O puedes especificar el peso si lo deseas
+
 
 export default function App() {
   return (
@@ -12,7 +14,7 @@ export default function App() {
           <ul>
             <li><Link to="/wines">Wines</Link></li>
             <li><Link to="/coffee">Coffee</Link></li>
-            <li><Link to="/jsondata">Json Data</Link></li>
+            <li><Link to="/jsondata">Beers</Link></li>
           </ul>
         </nav>
 
