@@ -131,7 +131,7 @@ nav ul li a:hover {
   border-radius: 8px;
 }
 .coffee-title {
-  font-family: "Brush Script MT", cursive;
+  font-family: 'single';
   font-size: 60px;
 }
 .coffee-card {
@@ -147,7 +147,7 @@ nav ul li a:hover {
   margin: 20px auto;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
 }
-.wine-card-title {
+.wines-card-title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,9 +161,19 @@ nav ul li a:hover {
 }
 
 .wines-title {
-  font-family: "Dancing Script", cursive;
-  font-size: 28px;
-  color: #6b1b0c; /* Rojo vino */
+    font-size: 28px;
+    color: #6b1b0c;
+    width: 200px;
+    height: 70px;
+    border-radius: 13em / 13em 50%;
+    background-color: #f8e1e7; /* Fondo rosado claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto; /* centrado */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    border: 4px solid #b03a2e; /* 🎯 Borde rojo vino */
+  
 }
 .wines-container {
   display: flex;
@@ -190,7 +200,6 @@ nav ul li a:hover {
 .wine-card:hover {
   transform: scale(1.05);
 }
-
 .wine-img {
   width: 100%;
   border-radius: 10px;
@@ -198,7 +207,6 @@ nav ul li a:hover {
 
 .wine-details {
   margin-top: 10px;
-  font-family: "Dancing Script", cursive;
   color: #6b1b0c; /* Rojo vino oscuro */
 }
 
@@ -293,6 +301,30 @@ nav ul li a:hover {
   width: 150px;
   height: 150px;
 }
+.Jsondata-title{
+  font-size: 28px;
+    color: #6b1b0c;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Jsondata-title {
+  font-family: 'Easy';
+  font-size: 30px;
+}
+.Jsondata-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: wave;
+  padding: 20px;
+  width: 150px;
+  height: 40px;
+  margin: 20px auto;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+}
+
 
 
 

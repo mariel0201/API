@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "@fontsource/dancing-script";
 import fallbackImage from "../assets/Taz.gif";
+import "../fonts.css";
 
 export default function JsonDataPage() {
   const [data, setData] = useState([]);
@@ -26,8 +27,8 @@ export default function JsonDataPage() {
     <div className="container">
       <Link to="/">Volver a la página principal</Link>
 
-      <div className="coffee-card">
-        <h1 className="coffee-title">Beers</h1>
+      <div className="Jsondata-card">
+        <h1 className="Jsondata-title">Json Data</h1>
       </div>
 
       <div className="cards-container">

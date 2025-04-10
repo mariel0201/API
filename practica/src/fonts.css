@@ -1,20 +1,21 @@
 @font-face {
     font-family: 'Easy';
-    src: url('./assets/fonts/Easy\ Lucky.otf') format('opentype');
+    src: url('./assets/fonts/Easy Lucky.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
   
   @font-face {
-    font-family: 'Quick';
-    src: url('./assets/fonts/Quick\ Beauty.otf') format('opentype');
+    font-family: 'Anatomy';
+    src: url('./assets/fonts/Anatomy Romantic.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
   
   @font-face {
     font-family: 'single';
-    src: url('./assets/fonts/Single\ Coffee.otf') format('opentype');
+    src: url('./assets/fonts/Single Coffee.otf') format('opentype');
+
     font-weight: normal;
     font-style: normal;
   }

@@ -53,7 +53,7 @@ export default function WinesPage() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: "Quick" }} className="wines-title">Wines</h1>
+      <h1 style={{ fontFamily: "Anatomy" }} className="wines-title">Wines</h1>
 
       {/* Barra de búsqueda */}
       <input
