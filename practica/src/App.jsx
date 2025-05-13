@@ -12,8 +12,8 @@ export default function App() {
         <h1>Practica API</h1>
         <nav>
           <ul>
-            <li><Link to="/wines">Wines</Link></li>
-            <li><Link to="/coffee">Coffee</Link></li>
+            <li><Link to="/wines">Noticias</Link></li>
+            <li><Link to="/coffee">Café</Link></li>
             <li><Link to="/jsondata">Beers</Link></li>
           </ul>
         </nav>

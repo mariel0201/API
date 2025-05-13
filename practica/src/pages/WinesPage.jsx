@@ -1,146 +1,93 @@
 import React, { useEffect, useState } from "react";
-import "../fonts.css";
+import "../index.css";
 
-export default function WinesPage() {
-  const [wines, setWines] = useState([]);
-  const [newWine, setNewWine] = useState({ winery: "", wine: "", location: "" });
-  const [editWineId, setEditWineId] = useState(null);
-  const [editWineData, setEditWineData] = useState({ winery: "", wine: "", location: "" });
+export default function NoticiasPage() {
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showForm, setShowForm] = useState(false);
 
+  // Cargar noticias y categorías
   useEffect(() => {
-    fetch("https://api.sampleapis.com/wines/reds")
-      .then((response) => response.json())
-      .then((data) => setWines(data))
-      .catch((error) => console.error("Error fetching wines:", error));
+    const fetchPosts = fetch("https://www.elmundotoday.com/wp-json/wp/v2/posts?per_page=100")
+      .then((res) => res.json());
+    const fetchCategories = fetch("https://www.elmundotoday.com/wp-json/wp/v2/categories")
+      .then((res) => res.json());
+
+    Promise.all([fetchPosts, fetchCategories])
+      .then(([postData, categoryData]) => {
+        setPosts(postData);
+        setCategories(categoryData);
+      })
+      .catch((err) => console.error("Error al cargar datos:", err));
   }, []);
 
-  const handleAddWine = () => {
-    const newWineData = { ...newWine, id: wines.length + 1 };
-    setWines([...wines, newWineData]);
-    setNewWine({ winery: "", wine: "", location: "" });
-    setShowForm(false);
-  };
+  const filteredPosts = posts.filter((post) => {
+    const matchesCategory =
+      selectedCategoryId === null || post.categories.includes(selectedCategoryId);
+    const matchesSearch =
+      post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
-  const handleEditClick = (wine) => {
-    setEditWineId(wine.id);
-    setEditWineData({
-      winery: wine.winery,
-      wine: wine.wine,
-      location: wine.location,
-    });
-  };
-
-  const handleUpdateWine = (id) => {
-    setWines(
-      wines.map((wine) =>
-        wine.id === id ? { ...wine, ...editWineData } : wine
-      )
-    );
-    setEditWineId(null);
-    setEditWineData({ winery: "", wine: "", location: "" });
-  };
-
-  const handleDeleteWine = (id) => {
-    setWines(wines.filter((wine) => wine.id !== id));
-  };
-
-  const filteredWines = wines.filter((wine) =>
-    wine.winery?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    wine.wine?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const selectedCategoryName = selectedCategoryId
+    ? categories.find((c) => c.id === selectedCategoryId)?.name
+    : null;
 
   return (
-    <div>
-      <h1 style={{ fontFamily: "Anatomy" }} className="wines-title">Wines</h1>
+    <div className="noticias-container">
+      <h1 className="noticias-titulo">📰 Noticias {selectedCategoryName && `de ${selectedCategoryName}`}</h1>
 
-      {/* Barra de búsqueda */}
+      <div className="categorias-menu">
+        <button
+          onClick={() => setSelectedCategoryId(null)}
+          className={!selectedCategoryId ? "categoria-activa" : ""}
+        >
+          Todas
+        </button>
+        {categories.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => setSelectedCategoryId(cat.id)}
+            className={selectedCategoryId === cat.id ? "categoria-activa" : ""}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
       <input
         type="text"
-        placeholder="Buscar vino o bodega..."
-        className="search-bar"
+        placeholder="Buscar noticia..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        className="noticias-busqueda"
       />
 
-      {/* Botón para mostrar el formulario */}
-      <button onClick={() => setShowForm(!showForm)} className="toggle-form-btn">
-        {showForm ? "Ocultar Formulario" : "Agregar Vino"}
-      </button>
-
-      {/* Formulario para agregar un vino */}
-      {showForm && (
-        <div className="wine-form">
-          <input
-            type="text"
-            placeholder="Bodega"
-            value={newWine.winery}
-            onChange={(e) => setNewWine({ ...newWine, winery: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Nombre del vino"
-            value={newWine.wine}
-            onChange={(e) => setNewWine({ ...newWine, wine: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Ubicación"
-            value={newWine.location}
-            onChange={(e) => setNewWine({ ...newWine, location: e.target.value })}
-          />
-          <button onClick={handleAddWine}>Guardar</button>
-        </div>
-      )}
-
-      {/* Lista de vinos */}
-      <div className="wines-container">
-        {filteredWines.length > 0 ? (
-          filteredWines.map((wine) => (
-            <div key={wine.id} className="wine-card">
-              <img className="wine-img" src={wine.image} alt={wine.wine} />
-              <div className="wine-details">
-                {editWineId === wine.id ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editWineData.winery}
-                      onChange={(e) =>
-                        setEditWineData({ ...editWineData, winery: e.target.value })
-                      }
-                    />
-                    <input
-                      type="text"
-                      value={editWineData.wine}
-                      onChange={(e) =>
-                        setEditWineData({ ...editWineData, wine: e.target.value })
-                      }
-                    />
-                    <input
-                      type="text"
-                      value={editWineData.location}
-                      onChange={(e) =>
-                        setEditWineData({ ...editWineData, location: e.target.value })
-                      }
-                    />
-                    <button onClick={() => handleUpdateWine(wine.id)}>💾 Guardar</button>
-                    <button onClick={() => setEditWineId(null)}>❌ Cancelar</button>
-                  </>
-                ) : (
-                  <>
-                    <h3>{wine.winery}</h3>
-                    <p><strong>Nombre:</strong> {wine.wine}</p>
-                    <p><strong>Ubicación:</strong> {wine.location}</p>
-                    <button onClick={() => handleEditClick(wine)}>✏️ Editar</button>
-                    <button onClick={() => handleDeleteWine(wine.id)}>🗑️ Eliminar</button>
-                  </>
-                )}
-              </div>
+      <div className="noticias-grid">
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <div className="noticia-card" key={post.id}>
+              <h3
+                className="noticia-titulo"
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              />
+              <div
+                className="noticia-extracto"
+                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+              />
+              <a
+                className="noticia-enlace"
+                href={post.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Leer más →
+              </a>
             </div>
           ))
         ) : (
-          <p>No se encontraron vinos.</p>
+          <p>No se encontraron noticias.</p>
         )}
       </div>
     </div>
